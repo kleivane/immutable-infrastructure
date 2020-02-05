@@ -8,6 +8,15 @@ resource "aws_s3_bucket" "assets" {
 
   tags = {
     Name        = "assets"
-    Environment = "dev"
+  }
+}
+
+resource "aws_s3_bucket" "test" {
+  bucket = "tf-immutable-webapp-test"
+  acl    = "public-read"
+
+  tags = {
+    Name        = "test"
+    Environment = "test"
   }
 }
