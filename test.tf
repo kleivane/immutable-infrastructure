@@ -87,8 +87,14 @@ resource "aws_cloudfront_distribution" "cloudfront_test" {
   }
 }
 
-# domain_name
+output "bucket_asset" {
+  value = aws_s3_bucket.assets.id
+}
+
+output "bucket_test" {
+  value = aws_s3_bucket.test.id
+}
+
 output "domain_name_test" {
   value = aws_cloudfront_distribution.cloudfront_test.domain_name
 }
-
