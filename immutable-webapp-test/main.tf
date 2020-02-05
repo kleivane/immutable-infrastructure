@@ -1,14 +1,10 @@
 provider "aws" {
   region = "eu-north-1"
+  version = "~> 2.47"
 }
 
-resource "aws_s3_bucket" "assets" {
-  bucket = "tf-immutable-webapp-assets"
-  acl    = "public-read"
-
-  tags = {
-    Name = "assets"
-  }
+module "s3_assets" {
+  source = "../immutable-webapp-common"
 }
 
 resource "aws_s3_bucket" "test" {
@@ -23,7 +19,7 @@ resource "aws_s3_bucket" "test" {
 
 locals {
   s3_origin_id_test   = "S3-${aws_s3_bucket.test.id}"
-  s3_origin_id_assets = "S3-${aws_s3_bucket.assets.id}"
+  s3_origin_id_assets = "S3-${module.s3_assets.bucket.id}"
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_test" {
@@ -33,7 +29,7 @@ resource "aws_cloudfront_distribution" "cloudfront_test" {
   }
 
   origin {
-    domain_name = aws_s3_bucket.assets.bucket_regional_domain_name
+    domain_name = module.s3_assets.bucket.bucket_regional_domain_name
     origin_id   = local.s3_origin_id_assets
   }
 
@@ -88,7 +84,7 @@ resource "aws_cloudfront_distribution" "cloudfront_test" {
 }
 
 output "bucket_asset" {
-  value = aws_s3_bucket.assets.id
+  value = module.s3_assets.bucket.id
 }
 
 output "bucket_test" {
