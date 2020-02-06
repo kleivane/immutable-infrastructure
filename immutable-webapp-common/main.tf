@@ -1,14 +1,9 @@
-resource "aws_s3_bucket" "assets" {
+data "aws_s3_bucket" "assets" {
   bucket = "tf-immutable-webapp-assets"
-  acl    = "public-read"
-
-  tags = {
-    Name = "assets"
-  }
 }
 
 locals {
-  s3_origin_id_assets = "S3-${aws_s3_bucket.assets.id}"
+  s3_origin_id_assets = "S3-${data.aws_s3_bucket.assets.id}"
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_env" {
@@ -18,7 +13,7 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   }
 
   origin {
-    domain_name = aws_s3_bucket.assets.bucket_regional_domain_name
+    domain_name = data.aws_s3_bucket.assets.bucket_regional_domain_name
     origin_id   = local.s3_origin_id_assets
   }
 
