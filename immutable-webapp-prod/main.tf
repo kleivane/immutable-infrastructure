@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "prod" {
   acl    = "public-read"
 
   tags = {
-    Name        = "prod"
+    Name        = "immutable-webapp-prod"
     Environment = "prod"
   }
 }
