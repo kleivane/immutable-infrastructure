@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "test" {
 }
 
 module "immutable_cloudfront" {
-  source = "../immutable-webapp-common"
+  source = "../modules/immutable-webapp-common"
 
   bucket_origin_id = "S3-${aws_s3_bucket.test.id}"
   bucket_domain_name = aws_s3_bucket.test.bucket_regional_domain_name
