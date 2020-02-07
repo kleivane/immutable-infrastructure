@@ -1,9 +1,14 @@
-data "aws_s3_bucket" "assets" {
-  bucket = "tf-immutable-webapp-assets"
+data "terraform_remote_state" "assets" {
+  backend = "s3"
+  config = {
+    bucket = "tf-immutable-infrastructure-remote-state-storage"
+    key    = "immutable_web_app_common"
+    region = "eu-north-1"
+  }
 }
 
 locals {
-  s3_origin_id_assets = "S3-${data.aws_s3_bucket.assets.id}"
+  s3_origin_id_assets = "S3-${data.terraform_remote_state.assets.outputs.id}"
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_env" {
@@ -13,7 +18,7 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   }
 
   origin {
-    domain_name = data.aws_s3_bucket.assets.bucket_regional_domain_name
+    domain_name = data.terraform_remote_state.assets.outputs.bucket_regional_domain_name
     origin_id   = local.s3_origin_id_assets
   }
 

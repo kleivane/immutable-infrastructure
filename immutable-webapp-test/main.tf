@@ -21,11 +21,11 @@ module "immutable_cloudfront" {
   environment= "test"
 }
 
-output "bucket_asset" {
-  value = module.immutable_cloudfront.bucket.id
+output "bucket_id_asset" {
+  value = module.immutable_cloudfront.bucket_id
 }
 
-output "bucket_test" {
+output "bucket_id_test" {
   value = aws_s3_bucket.test.id
 }
 

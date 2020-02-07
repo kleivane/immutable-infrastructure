@@ -1,5 +1,5 @@
-output "bucket" {
-  value       = data.aws_s3_bucket.assets
+output "bucket_id" {
+  value       = data.terraform_remote_state.assets.outputs.id
   description = "The created bucket for assets across all environments"
 }
 
