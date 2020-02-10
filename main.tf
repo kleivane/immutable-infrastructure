@@ -1,3 +1,7 @@
+terraform {
+  required_version = ">= 0.12"
+}
+
 data "terraform_remote_state" "assets" {
   backend = "s3"
   config = {

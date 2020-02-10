@@ -1,15 +1,11 @@
-# immutable-infrastructure
-Terraform infrastructure for immutable webapp &amp; friends
+# terraform-aws-cloudfront-s3-assets
 
-## Running
-For å kjøre terraform må du sette [environment-variable](https://www.terraform.io/docs/providers/aws/index.html) for access til aws.
+Oppretter cloudfront-config for
+* assets/ pekende til en standard felles S3-bucket for genererte assets
+* bucket som inneholder annet inneholder
 
-## Gode prinsipper
-* Infrastruktur som kode
-* Deploy av kode og infrastruktur skal skje fra ci
-* Utviklere skal ha rettigheter som ikke stopper dem fra å teste og utforske
-* Prod skal ha annen tilgangsstyring enn test
-* Bygget kode skal kunne deployes til alle miljøer - config skal leve et annet sted
-* Den eneste hemmeligheten utenfor infrastrukturen skal egentlig være access-keys
-* Gjør deg kjent med verktøyene i skyplattformen, deres styrker og svakheter, følg med på nyheter :)
-* Om to produkter kan løse samme oppgaven, velg den som gir minst vedlikeholdsarbeide
+Begge har konfigureres til å støtte cache headers som kommer fra bøttene.
+Modulen er laget for å støtte opp under immutable-webapps-applikasjonen.
+
+Felles ressurs
+- S3 bucket for genererte assets
