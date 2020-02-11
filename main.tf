@@ -26,6 +26,8 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
     origin_id   = local.s3_origin_id_assets
   }
 
+  aliases = var.aliases
+
   # Se https://github.com/terraform-providers/terraform-provider-aws/issues/1994 beskrivelse av "use origin headers"
   default_cache_behavior {
     allowed_methods = ["GET", "HEAD"]

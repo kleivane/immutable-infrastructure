@@ -8,6 +8,11 @@ variable "bucket_origin_id" {
   type        = string
 }
 
+variable "aliases" {
+  description = "Alternate domain names"
+  type        = list(string)
+}
+
 variable "environment" {
   description = "The environment for the cloudfront distribution - will be set as tag and comment"
   type        = string
