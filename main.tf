@@ -2,6 +2,10 @@ terraform {
   required_version = ">= 0.12"
 }
 
+data "aws_acm_certificate" "skysett" {
+  domain   = "*.skysett.net"
+}
+
 data "terraform_remote_state" "assets" {
   backend = "s3"
   config = {
@@ -74,6 +78,6 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = data.aws_acm_certificate.skysett.arn
   }
 }
