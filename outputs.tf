@@ -7,8 +7,3 @@ output "distribution" {
   value       = aws_cloudfront_distribution.cloudfront_env
   description = "The cloudfront distribution created for the specified environment"
 }
-
-output "zone_id" {
-  value       = aws_cloudfront_distribution.hosted_zone_id
-  description = "The cloudfront distribution Route 53 zone ID "
-}
