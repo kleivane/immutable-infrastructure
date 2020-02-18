@@ -2,8 +2,14 @@ terraform {
   required_version = ">= 0.12"
 }
 
+provider "aws" {
+  alias = "certificate_region"
+  region = "us-east-1"
+}
+
 data "aws_acm_certificate" "skysett" {
   domain   = "*.skysett.net"
+  provider = aws.certificate_region
 }
 
 data "terraform_remote_state" "assets" {
