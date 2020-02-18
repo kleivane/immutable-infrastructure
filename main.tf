@@ -72,12 +72,15 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   is_ipv6_enabled     = true
   comment             = var.environment
   default_root_object = "index.html"
+  ssl_support_method = "sni-only"
+  minimum_protocol_version = "TLSv1.1_2016"
 
   restrictions {
     geo_restriction {
       restriction_type = "none"
     }
   }
+
 
   tags = {
     Environment = var.environment
