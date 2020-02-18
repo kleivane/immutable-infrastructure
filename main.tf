@@ -72,8 +72,7 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   is_ipv6_enabled     = true
   comment             = var.environment
   default_root_object = "index.html"
-  ssl_support_method = "sni-only"
-  minimum_protocol_version = "TLSv1.1_2016"
+
 
   restrictions {
     geo_restriction {
@@ -88,5 +87,7 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
 
   viewer_certificate {
     acm_certificate_arn = data.aws_acm_certificate.skysett.arn
+    ssl_support_method = "sni-only"
+    minimum_protocol_version = "TLSv1.1_2016"
   }
 }
