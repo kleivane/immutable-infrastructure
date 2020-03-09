@@ -13,6 +13,11 @@ variable "aliases" {
   type        = list(string)
 }
 
+variable "certificate" {
+  description = "Certificate-arn to cover alternate domain names"
+  type        = string
+}
+
 variable "environment" {
   description = "The environment for the cloudfront distribution - will be set as tag and comment"
   type        = string

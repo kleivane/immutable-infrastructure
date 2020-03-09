@@ -2,16 +2,7 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "aws" {
-  alias = "certificate_region"
-  region = "us-east-1"
-}
-
-data "aws_acm_certificate" "skysett" {
-  domain   = "*.skysett.net"
-  provider = aws.certificate_region
-}
-
+#Flytt til variables
 data "terraform_remote_state" "assets" {
   backend = "s3"
   config = {
@@ -86,8 +77,8 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = data.aws_acm_certificate.skysett.arn
-    ssl_support_method = "sni-only"
+    acm_certificate_arn      = var.certificate
+    ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }
 }
