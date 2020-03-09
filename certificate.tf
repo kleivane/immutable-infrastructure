@@ -5,7 +5,7 @@ provider "aws" {
 
 
 resource "aws_acm_certificate" "primary" {
-  domain_name       = aliases[0]
+  domain_name       = var.aliases[0]
   validation_method = "DNS"
 
   tags = {
