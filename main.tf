@@ -2,6 +2,11 @@ terraform {
   required_version = ">= 0.12"
 }
 
+provider "aws" {
+  alias  = "certificate_region"
+  region = "us-east-1"
+}
+
 #Flytt til variables
 data "terraform_remote_state" "assets" {
   backend = "s3"
