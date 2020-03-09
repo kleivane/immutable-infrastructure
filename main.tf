@@ -2,11 +2,6 @@ terraform {
   required_version = ">= 0.12"
 }
 
-provider "aws" {
-  alias  = "certificate_region"
-  region = "us-east-1"
-}
-
 #Flytt til variables
 data "terraform_remote_state" "assets" {
   backend = "s3"
@@ -82,7 +77,7 @@ resource "aws_cloudfront_distribution" "cloudfront_env" {
   }
 
   viewer_certificate {
-    acm_certificate_arn      = var.certificate_arn
+    acm_certificate_arn      = aws_acm_certificate_validation.primary.certificate_arn
     ssl_support_method       = "sni-only"
     minimum_protocol_version = "TLSv1.1_2016"
   }

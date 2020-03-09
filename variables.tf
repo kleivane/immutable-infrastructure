@@ -9,13 +9,13 @@ variable "bucket_origin_id" {
 }
 
 variable "aliases" {
-  description = "Alternate domain names"
+  description = "Alternate domain names. The first alias will be the one used in certificate creation"
   type        = list(string)
 }
 
-variable "certificate_arn" {
-  description = "Certificate-arn to cover alternate domain names"
-  type        = string
+variable "zone_id" {
+  description = "The hosted zone for DNS record-certificate validation"
+  type        = list(string)
 }
 
 variable "environment" {
