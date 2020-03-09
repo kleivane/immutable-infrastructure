@@ -15,7 +15,7 @@ variable "aliases" {
 
 variable "zone_id" {
   description = "The hosted zone for DNS record-certificate validation"
-  type        = list(string)
+  type        = string
 }
 
 variable "environment" {
