@@ -13,7 +13,7 @@ variable "aliases" {
   type        = list(string)
 }
 
-variable "certificate" {
+variable "certificate_arn" {
   description = "Certificate-arn to cover alternate domain names"
   type        = string
 }
